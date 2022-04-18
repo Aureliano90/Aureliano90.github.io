@@ -29,7 +29,7 @@ url: https://aureliano90.github.io # the base hostname & protocol for your site,
 github_username:  Aureliano90
 
 # Build settings
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
