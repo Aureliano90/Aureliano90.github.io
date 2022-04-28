@@ -3,7 +3,7 @@ layout: post
 categories: blog
 author: Aureliano
 title:  浅谈Python协程与__await__属性
-date:   2022-04-27 18:28:00 -0500
+date:   2022-04-27 20:38:00 -0500
 tags: [python, asyncio]
 comments: True
 ---
