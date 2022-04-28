@@ -1,9 +1,11 @@
 ---
 layout: post
+categories: blog
 author: Aureliano
 title:  在Python中实现客户端限制API访问速率
 date:   2022-04-19 00:28:00 -0500
-categories: python asyncio semaphore
+tags: [python, asyncio, semaphore]
+comments: True
 ---
 
 ## 限速算法
@@ -12,7 +14,7 @@ categories: python asyncio semaphore
 。具体实现也有许多现成工具，此处不赘述。
 
 不过据我观察与测试，OKEx
-API的限流方式既不是漏桶也不是令牌桶，进行一番搜索后也不知该如何命名。以其[历史资金费API](https://www.okx.com/api/v5/public/funding-rate-history?instId=BTC-USDT-SWAP)
+API的限流方式既不是漏桶也不是令牌桶，经搜索发现其应是滑动窗口算法。以其[历史资金费API](https://www.okx.com/api/v5/public/funding-rate-history?instId=BTC-USDT-SWAP)
 为例，[文档](https://www.okx.com/docs-v5/zh/#rest-api-public-data-get-funding-rate-history)里写着：
 
 ```
@@ -148,5 +150,5 @@ class p_Semaphore(ContextManager):
 
 ## 总结
 
-要限制并发连接数和访问速率，只需在每次调用API时以上下文管理器调用以上Semaphore实例。创建实例时`value`参数为最大并发数，`interval`为刷新间隔。以上实现完全兼容令牌桶算法，只需让`value`
-等于令牌桶容量，令`value / interval`等于令牌填充速度。
+要限制并发连接数和访问速率，只需在每次调用API时以上下文管理器调用以上Semaphore实例。创建实例时`value`参数为最大并发数，`interval`为刷新间隔。
+以上实现遵从滑动窗口算法，且完全兼容令牌桶算法，只需让`value`等于令牌桶容量，令`value / interval`等于令牌填充速度。
